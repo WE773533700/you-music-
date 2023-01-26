@@ -73,21 +73,8 @@ def PlayWrapper(command):
                     caption=_["playlist_1"],
                     reply_markup=InlineKeyboardMarkup(buttons),
                 )
-        if message.sender_chat:
-            upl = InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="How to Fix this? ",
-                            callback_data="AnonymousAdmin",
-                        ),
-                    ]
-                ]
-            )
-            return await message.reply_text(
-                _["general_4"], reply_markup=upl
-            )
-        if message.command[0][0] == "c":
+        
+        if message.command[0][0] == "#":
             chat_id = await get_cmode(message.chat.id)
             if chat_id is None:
                 return await message.reply_text(_["setting_12"])
@@ -109,13 +96,13 @@ def PlayWrapper(command):
                 else:
                     if message.from_user.id not in admins:
                         return await message.reply_text(_["play_4"])
-        if message.command[0][0] == "v":
+        if message.command[0][0] == "ف":
             video = True
         else:
-            if "-v" in message.text:
+            if "-ف" in message.text:
                 video = True
             else:
-                video = True if message.command[0][1] == "v" else None
+                video = True if message.command[0][1] == "ف" else None
         if message.command[0][-1] == "e":
             if not await is_active_chat(chat_id):
                 return await message.reply_text(_["play_18"])
